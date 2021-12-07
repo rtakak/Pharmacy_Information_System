@@ -18,199 +18,194 @@ void sleep(unsigned milliseconds)
 using namespace std;
 
 #define DEBUG false
-#define eczn_file "eczane_liste.dat"
+#define pharmacy_file "pharmacy_list.dat"
 #define pass "merhaba123"
 
-class ilac
+class medicine
 {
-	int ilac_id;
-	int ilac_sayisi;
-	double ilac_fiyati;
-	string ilac_ismi;
+	int medicine_id;
+	int medicine_count;
+	double medicine_price;
+	string medicine_name;
 
  public:
 	static int id_counter;
-	ilac()
+	medicine()
 	{
-		ilac_sayisi = 0;
-		ilac_fiyati = 0;
-		ilac_ismi = "";
+		medicine_count = 0;
+		medicine_price = 0;
+		medicine_name = "";
 	}
 
-	ilac(int sayi, double fiyat, string ismi)
+	medicine(int number, double price, string name)
 	{
-		ilac_sayisi = sayi;
-		ilac_fiyati = fiyat;
-		ilac_ismi = ismi;
+		medicine_count = number;
+		medicine_price = price;
+		medicine_name = name;
 	}
 
-	ilac(const ilac& other)
+	medicine(const medicine& other)
 	{
-		ilac_sayisi = other.ilac_sayisi;
-		ilac_fiyati = other.ilac_fiyati;
-		ilac_ismi = other.ilac_ismi;
+		medicine_count = other.medicine_count;
+		medicine_price = other.medicine_price;
+		medicine_name = other.medicine_name;
 	}
 
-	ilac& operator=(const ilac other)
+	medicine& operator=(const medicine other)
 	{
-		ilac_sayisi = other.ilac_sayisi;
-		ilac_fiyati = other.ilac_fiyati;
-		ilac_ismi = other.ilac_ismi;
+		medicine_count = other.medicine_count;
+		medicine_price = other.medicine_price;
+		medicine_name = other.medicine_name;
 		return *this;
 	}
-	void isim(string isim)
+	void name(string name)
 	{
-		ilac_ismi = isim;
+		medicine_name = name;
 	}
-	void fiyat(double fiyat)
+	void price(double price)
 	{
-		ilac_fiyati = fiyat;
+		medicine_price = price;
 	}
-	void sayi(int sayi)
+	void number(int number)
 	{
-		ilac_sayisi = sayi;
+		medicine_count = number;
 	}
 	void id(int id)
 	{
-		ilac_id = id;
+		medicine_id = id;
 	}
 	int id()
 	{
-		return ilac_id;
+		return medicine_id;
 	}
-	string isim()
+	string name()
 	{
-		return ilac_ismi;
+		return medicine_name;
 	}
-	double fiyat()
+	double price()
 	{
-		return ilac_fiyati;
+		return medicine_price;
 	}
-	int sayi()
+	int count()
 	{
-		return ilac_sayisi;
+		return medicine_count;
 	}
-	ilac& ilac_olustur();
+	medicine& create_medicine();
 	void print_all()
 	{
-		cout << "\nID: " << ilac_id << "\nIsim: " << ilac_ismi << "\nFiyati: " << ilac_fiyati << "\nAdedi:"
-			 << ilac_sayisi
+		cout << "\nID: " << medicine_id << "\nName: " << medicine_name << "\nPrice: " << medicine_price << "\nCount:"
+			 << medicine_count
 			 << "\n";
 	}
-	friend ostream& operator<<(ostream& output, const ilac& object)
+	friend ostream& operator<<(ostream& output, const medicine& object)
 	{
-		return output << object.ilac_id << "\t" << object.ilac_ismi << "\t" << object.ilac_fiyati << "\t"
-					  << object.ilac_sayisi << "\n";
+		return output << object.medicine_id << "\t" << object.medicine_name << "\t" << object.medicine_price << "\t"
+					  << object.medicine_count << "\n";
 	}
 
-	friend istream& operator>>(istream& input, ilac& object)
+	friend istream& operator>>(istream& input, medicine& object)
 	{
-		input >> object.ilac_id >> object.ilac_ismi >> object.ilac_fiyati >> object.ilac_sayisi;
+		input >> object.medicine_id >> object.medicine_name >> object.medicine_price >> object.medicine_count;
 
 		return input;
 	}
 };
 
-int ilac::id_counter = 0;
+int medicine::id_counter = 0;
 
-class eczn
+class pharmacy
 {
-	int eczn_id;
-	string eczn_isim;
-	string eczn_adres;
+	int pharmacy_id;
+	string pharmacy_name;
+	string pharmacy_address;
 
  public:
-	int static eczn_counter;
+	int static pharmacy_counter;
 	void print_all()
 	{
-		cout << "id: " << eczn_id << "\nisim: " << eczn_isim << "\nadres: " << eczn_adres << "\n";
+		cout << "id: " << pharmacy_id << "\nisim: " << pharmacy_name << "\nadres: " << pharmacy_address << "\n";
 	}
 
-	eczn()
+	pharmacy()
 	{
-		eczn_isim = "";
-		eczn_adres = "";
+		pharmacy_name = "";
+		pharmacy_address = "";
 	}
-	eczn(string isim, string adres)
+	pharmacy(string name, string address)
 	{
-		eczn_isim = isim;
-		eczn_adres = adres;
+		pharmacy_name = name;
+		pharmacy_address = address;
 	}
 
-	eczn(const eczn& other)
+	pharmacy(const pharmacy& other)
 	{
-		eczn_isim = other.eczn_isim;
-		eczn_adres = other.eczn_adres;
+		pharmacy_name = other.pharmacy_name;
+		pharmacy_address = other.pharmacy_address;
 	}
-	eczn& operator=(const eczn& other)
+	pharmacy& operator=(const pharmacy& other)
 	{
-		eczn_id = other.eczn_id;
-		eczn_isim = other.eczn_isim;
-		eczn_adres = other.eczn_adres;
+		pharmacy_id = other.pharmacy_id;
+		pharmacy_name = other.pharmacy_name;
+		pharmacy_address = other.pharmacy_address;
 		return *this;
 	}
 
-	/*  void eczn_olustur()
-	void eczn_goster()
-	void eczn_ilac_sayfasi()
-
-	getve setfonksiyonları */
 	int id()
 	{
-		return eczn_id;
+		return pharmacy_id;
 	}
-	string isim()
+	string name()
 	{
-		return eczn_isim;
+		return pharmacy_name;
 	}
-	string adres()
+	string address()
 	{
-		return eczn_adres;
+		return pharmacy_address;
 	}
 	void id(int id)
 	{
-		eczn_id = id;
+		pharmacy_id = id;
 	}
-	void isim(string isim)
+	void name(string name)
 	{
-		eczn_isim = isim;
+		pharmacy_name = name;
 	}
-	void adres(string adres)
+	void address(string address)
 	{
-		eczn_adres = adres;
-	}
-
-	friend ostream& operator<<(ostream& output, const eczn& object)
-	{
-		return output << object.eczn_id << "\t" << object.eczn_isim << "\t" << object.eczn_adres << "\n";
+		pharmacy_address = address;
 	}
 
-	friend istream& operator>>(istream& input, eczn& object)
+	friend ostream& operator<<(ostream& output, const pharmacy& object)
 	{
-		input >> object.eczn_id >> object.eczn_isim;
-		getline(input, object.eczn_adres);
+		return output << object.pharmacy_id << "\t" << object.pharmacy_name << "\t" << object.pharmacy_address << "\n";
+	}
+
+	friend istream& operator>>(istream& input, pharmacy& object)
+	{
+		input >> object.pharmacy_id >> object.pharmacy_name;
+		getline(input, object.pharmacy_address);
 		// object.print_all();
 
 		return input;
 	}
 };
 
-int eczn::eczn_counter = 0;
+int pharmacy::pharmacy_counter = 0;
 
 void init_value();
 int menu(int menu_loc);
 int main_menu();
-void eczn_ekle();
-bool liste_kontrol(string isim);
-void eczn_liste_olustur();
-void ilac_ekle(string isim = "");
-int id_bul(string obj);
-void ilac_duzenle();
+void add_pharmacy();
+bool list_check(string isim);
+void create_pharmacy_list();
+void add_list(string isim = "");
+int find_id(string obj);
+void edit_medicine();
 void edit_line(string file_name, int line);
-void ilac_ara();
-void eczn_listele();
-void eczn_ara();
-void eczn_liste_ara();
+void search_medicine();
+void list_pharmacies();
+void search_pharmacy();
+void search_pharmacy_list();
 
 int main()
 {
@@ -236,20 +231,20 @@ int main()
 		else if (menu_loc == 1)
 		{
 			menu_choice = menu(menu_loc);
-			//Eczane Menusu
+			//Pharmacy Menu
 			switch (menu_choice)
 			{
 			case 1:
-				eczn_liste_olustur();
+				create_pharmacy_list();
 				break;
 			case 2:
-				eczn_ekle();
+				add_pharmacy();
 				break;
 			case 3:
-				ilac_ekle();
+				add_list();
 				break;
 			case 4:
-				ilac_duzenle();
+				edit_medicine();
 				break;
 			case 5:
 				menu_loc = 0;
@@ -264,16 +259,16 @@ int main()
 			switch (menu_choice)
 			{
 			case 1:
-				ilac_ara();
+				search_medicine();
 				break;
 			case 2:
-				eczn_listele();
+				list_pharmacies();
 				break;
 			case 3:
-				eczn_ara();
+				search_pharmacy();
 				break;
 			case 4:
-				eczn_liste_ara();
+				search_pharmacy_list();
 				break;
 			case 5:
 				menu_loc = 0;
@@ -288,24 +283,24 @@ int main()
 int main_menu()
 {
 	int choice;
-	cout << "\n1. Eczane Girisi\n";
-	cout << "2. Musteri Girisi\n";
-	cout << "3. Cikis\n";
+	cout << "\n1. Pharmacy Interface\n";
+	cout << "2. Customer Interface\n";
+	cout << "3. Exit\n";
 	cin >> choice;
 
 	if (choice == 1)
 	{
-		cout << "Parolayi giriniz: ";
-		string parola;
-		cin >> parola;
-		if (parola == pass)
+		cout << "Password: ";
+		string passw;
+		cin >> passw;
+		if (passw == pass)
 		{
-			cout << "Parola kabul edildi.\n\n";
+			cout << "Correct Password.\n\n";
 			return choice;
 		}
 		else
 		{
-			cout << "\nYanlis Parola!\n";
+			cout << "\nIncorrect Password!\n";
 			return 0;
 		}
 	}
@@ -318,23 +313,23 @@ int menu(int menu_loc)
 
 	if (menu_loc == 1)
 	{
-		cout << "Eczane Girisi:\n\n";
-		cout << "\t1. Eczane listesi olustur\n";
-		cout << "\t2. Eczane ekle\n";
-		cout << "\t3. Ilac ekle\n";
-		cout << "\t4. Ilac duzenle\n";
-		cout << "\t5. Ana Menu\n";
+		cout << "\nPharmacy Interface:\n\n";
+		cout << "\t1. Create Pharmacy List\n";
+		cout << "\t2. Add Pharmacy\n";
+		cout << "\t3. Add Medicine\n";
+		cout << "\t4. Update Medicine\n";
+		cout << "\t5. Back to Main Menu\n";
 		cin >> choice;
 		return choice;
 	}
 	else if (menu_loc == 2)
 	{
-		cout << "Musteri Girisi:\n\n";
-		cout << "\t1. Ilac ara\n";
-		cout << "\t2. Eczane listele\n";
-		cout << "\t3. Herhangi bir Eczaneyi Goster\n";
-		cout << "\t4. Herhangi bir Eczaneye ait Ilac Listesi\n";
-		cout << "\t5. Ana Menu\n";
+		cout << "Customer Interface:\n\n";
+		cout << "\t1. Search Medicine";
+		cout << "\t2. List Pharmacies\n";
+		cout << "\t3. Show information of the Pharmacy\n";
+		cout << "\t4. Show the medicine list of the Pharmacy\n";
+		cout << "\t5. Back to Main Menu\n";
 		cin >> choice;
 		return choice;
 	}
@@ -348,10 +343,10 @@ void init_value()
 	string check;
 	int max = 0, max2 = 0, curr, curr2;;
 	ifstream input;
-	input.open(eczn_file, ios::in);
+	input.open(pharmacy_file, ios::in);
 	{
-		eczn buff;
-		ilac buff2;
+		pharmacy buff;
+		medicine buff2;
 
 		while (input >> buff)
 		{
@@ -364,9 +359,9 @@ void init_value()
 					cout << "new max: " << curr << "\nold max: " << max << "\n";
 				max = curr;
 			}
-			check = buff.isim();
+			check = buff.name();
 
-			if (liste_kontrol(check))
+			if (list_check(check))
 			{
 				check += prefix;
 				//cout << "\nchecking: " << check;
@@ -385,48 +380,48 @@ void init_value()
 		}
 	}
 	cout << "Eczane ID sayaci: " << max << "\nIlac ID sayaci: " << max2 << "\n///////////////////////////////\n\n";
-	ilac::id_counter = max2;
-	eczn::eczn_counter = max;
+	medicine::id_counter = max2;
+	pharmacy::pharmacy_counter = max;
 	return;
 }
 
-ilac& ilac::ilac_olustur()
+medicine& medicine::create_medicine()
 {
 
-	cout << "\nIlac ismi: ";
-	cin >> ilac_ismi;
+	cout << "\nMedicine's Name: ";
+	cin >> medicine_name;
 
-	cout << "\nIlac sayisi: ";
-	cin >> ilac_sayisi;
+	cout << "\nMedicine'stock: ";
+	cin >> medicine_count;
 
-	cout << "\nIlac fiyati: ";
-	cin >> ilac_fiyati;
+	cout << "\nMedicine's Price: ";
+	cin >> medicine_price;
 
 	return *this;
 }
 
-void eczn_ekle()
+void add_pharmacy()
 {
 	string isim;
 	string adres;
 
-	cout << "\tEczane Ekle:\n";
-	cout << "\n\t\tEczane ismi: ";
+	cout << "\tAdd Pharmacy:\n";
+	cout << "\n\t\tPharmacy Name: ";
 	cin >> isim;
-	cout << "\n\t\tEczane adresi: ";
+	cout << "\n\t\tPharmacy Address: ";
 	cin.ignore();
 	getline(cin, adres);
 	{
-		eczn ekle(isim, adres);
-		ekle.id(++eczn::eczn_counter);
+		pharmacy ekle(isim, adres);
+		ekle.id(++pharmacy::pharmacy_counter);
 		ofstream output;
-		output.open(eczn_file, ios::app);
+		output.open(pharmacy_file, ios::app);
 		output << ekle;
 		output.close();
 	}
 }
 
-bool liste_kontrol(string isim)
+bool list_check(string isim)
 {
 	string prefix = "_ilac.dat";
 	string check = isim + prefix;
@@ -435,17 +430,17 @@ bool liste_kontrol(string isim)
 	return input.good();
 }
 
-void eczn_liste_olustur()
+void create_pharmacy_list()
 {
-	ifstream input(eczn_file);
-	eczn buff;
-	eczn array[eczn::eczn_counter];
+	ifstream input(pharmacy_file);
+	pharmacy buff;
+	pharmacy array[pharmacy::pharmacy_counter];
 
 	int counter = 0;
 
 	while (input >> buff)
 	{
-		if (!liste_kontrol(buff.isim()))
+		if (!list_check(buff.name()))
 		{
 			array[counter] = buff;
 			counter++;
@@ -455,42 +450,42 @@ void eczn_liste_olustur()
 
 	if (counter == 0)
 	{
-		cout << "\n\tSistemde her eczanenin listesi mevcuttur.\n\n";
+		cout << "\n\tEvery Pharmacy has their Medicine List on the Database.\n\n";
 		return;
 	}
 
-	cout << "\n\tListesi Olmayan Eczaneler:\n";
+	cout << "\n\tPharmacies that doesnt have their Medicine List:\n";
 	for (int i = 0; i < counter; ++i)
 	{
-		cout << "\n\t" << i + 1 << ": " << array[i].isim();
+		cout << "\n\t" << i + 1 << ": " << array[i].name();
 	}
-	cout << "\n\n\t Secim yapiniz: ";
+	cout << "\n\n\t Make a Choice: ";
 	int choice;
 	cin >> choice;
 	choice--;
 	string prefix = "_ilac.dat";
-	string isim = array[choice].isim();
+	string isim = array[choice].name();
 	string file = isim + prefix;
 	ofstream output(file);
 	output.close();
-	cout << "\n\tListe basariyla olusturulmustur.\n\n";
+	cout << "\n\tThe List created successfully.\n\n";
 }
 
-void ilac_ekle(string isim)
+void add_list(string isim)
 {
 	string prefix = "_ilac.dat";
 	string file;
 	if (isim == "")
 	{
 		//listesi olanları sıralayıp seçim yaptır
-		ifstream input(eczn_file);
-		eczn buff;
-		eczn array[eczn::eczn_counter];
+		ifstream input(pharmacy_file);
+		pharmacy buff;
+		pharmacy array[pharmacy::pharmacy_counter];
 		int counter = 0;
 
 		while (input >> buff)
 		{
-			if (liste_kontrol(buff.isim()))
+			if (list_check(buff.name()))
 			{
 				array[counter] = buff;
 				counter++;
@@ -499,27 +494,27 @@ void ilac_ekle(string isim)
 		input.close();
 		if (counter == 0)
 		{
-			cout << "\n\tKayitli eczane listesi yoktur.\nOnce liste olusturun.\n\n";
+			cout << "\n\tThere isnt a registered Pharmacy List.\nCreate one first.\n\n";
 			return;
 		}
 
-		cout << "\n\tEkleme yapilabilen Eczaneler:\n";
+		cout << "\n\tPharmacies that can be add on:\n";
 		for (int i = 0; i < counter; ++i)
 		{
-			cout << "\n\t\t" << i + 1 << ": " << array[i].isim();
+			cout << "\n\t\t" << i + 1 << ": " << array[i].name();
 		}
-		cout << "\n\n\t Secim yapiniz: ";
+		cout << "\n\n\t Make a Choice: ";
 		int choice;
 		cin >> choice;
 		choice--;
-		isim = array[choice].isim();
+		isim = array[choice].name();
 	}
 
 	file = isim + prefix;
-	cout << "\n\n\t" << file << " dosyasi secildi.\n";
-	ilac buffer;
-	buffer.ilac_olustur();
-	buffer.id(id_bul(buffer.isim()));
+	cout << "\n\n\t" << file << " is selected.\n";
+	medicine buffer;
+	buffer.create_medicine();
+	buffer.id(find_id(buffer.name()));
 
 	ofstream output(file, ios::app);
 	output << buffer;
@@ -527,22 +522,22 @@ void ilac_ekle(string isim)
 	output.close();
 }
 
-int id_bul(string obj)
+int find_id(string obj)
 {
 
 	string prefix = "_ilac.dat";
 	string check;
 	string curr;
 	ifstream input;
-	input.open(eczn_file, ios::in);
+	input.open(pharmacy_file, ios::in);
 	{
-		eczn buff;
-		ilac buff2;
+		pharmacy buff;
+		medicine buff2;
 
 		while (input >> buff)
 		{
-			check = buff.isim();
-			if (liste_kontrol(check))
+			check = buff.name();
+			if (list_check(check))
 			{
 				check += prefix;
 				//cout << "\nchecking: " << check;
@@ -550,7 +545,7 @@ int id_bul(string obj)
 				while (input2 >> buff2)
 				{
 					//buff2.print_all();
-					curr = buff2.isim();
+					curr = buff2.name();
 					if (obj == curr)
 					{
 						//cout << check << " dosyasında " << curr << "isimli ilac bulunmustur, id: " << buff2.id() << "\n";
@@ -559,27 +554,27 @@ int id_bul(string obj)
 				}
 			}
 		}
-		int id = ++ilac::id_counter;
+		int id = ++medicine::id_counter;
 		//cout << "\nfounded id: " << id << "\n";
 		return id;
 	}
 }
 
-void ilac_duzenle()
+void edit_medicine()
 {
 	string file;
 	{
-		ifstream input(eczn_file);
-		eczn buff;
-		string array[eczn::eczn_counter];
+		ifstream input(pharmacy_file);
+		pharmacy buff;
+		string array[pharmacy::pharmacy_counter];
 
 		int counter = 0;
 
 		while (input >> buff)
 		{
-			if (liste_kontrol(buff.isim()))
+			if (list_check(buff.name()))
 			{
-				array[counter] = buff.isim();
+				array[counter] = buff.name();
 				counter++;
 			}
 		}
@@ -587,16 +582,16 @@ void ilac_duzenle()
 
 		if (counter == 0)
 		{
-			cout << "\n\tEczane listesi bulunamamistir.\n\n";
+			cout << "\n\tCouldnt find the pharmacy list.\n\n";
 			return;
 		}
 
-		cout << "\n\tListesi Olan Eczaneler:\n";
+		cout << "\n\tPharmacies that has their list:\n";
 		for (int i = 0; i < counter; ++i)
 		{
 			cout << "\n\t" << i + 1 << ": " << array[i];
 		}
-		cout << "\n\n\tDuzenlemek icin secim yapiniz: ";
+		cout << "\n\n\tSelect one to edit: ";
 		int choice;
 		cin >> choice;
 		choice--;
@@ -606,7 +601,7 @@ void ilac_duzenle()
 	}
 
 	ifstream input(file);
-	ilac buff;
+	medicine buff;
 	int line, counter = 0;
 	while (input >> buff)
 	{
@@ -615,10 +610,10 @@ void ilac_duzenle()
 	}
 	if (!counter)
 	{
-		cout << "\nListede Ilac Yok!\n\n";
+		cout << "\nThere isnt a medicine in the list!\n\n";
 		return;
 	}
-	cout << "\nSecim yapin: ";
+	cout << "\nMake a choice: ";
 	int choice;
 	cin >> choice;
 	edit_line(file, choice);
@@ -629,7 +624,7 @@ void edit_line(string file_name, int line)
 	//ToDo belirlediğim satır haricindekileri başka bir dosyaya yazsın sonra ilk dosyayı sildin sonra yazdığını rename
 	ifstream input(file_name);
 
-	ilac array[ilac::id_counter];
+	medicine array[medicine::id_counter];
 	int counter = 0;
 
 	while (input >> array[counter])
@@ -637,15 +632,15 @@ void edit_line(string file_name, int line)
 		counter++;
 	}
 
-	cout << "\nEski fiyat: " << array[line - 1].fiyat() << " Yeni fiyati giriniz: ";
+	cout << "\nOld price: " << array[line - 1].price() << " Enter the new price: ";
 	double t;
 	cin >> t;
-	array[line - 1].fiyat(t);
+	array[line - 1].price(t);
 
 	int t2;
-	cout << "\nEski adet: " << array[line - 1].sayi() << " Yeni sayiyi giriniz: ";
+	cout << "\nOld stock: " << array[line - 1].count() << " Enter the new stock: ";
 	cin >> t2;
-	array[line - 1].sayi(t2);
+	array[line - 1].number(t2);
 
 	input.close();
 	ofstream output;
@@ -656,10 +651,10 @@ void edit_line(string file_name, int line)
 	}
 }
 
-void ilac_ara()
+void search_medicine()
 {
-	cout << "\nIlac Arama:\n\n";
-	cout << "\tIlac ismi giriniz: ";
+	cout << "\nSearch Medicine:\n\n";
+	cout << "\tEnter Medicine Name: ";
 	string isim;
 	cin >> isim;
 
@@ -668,23 +663,23 @@ void ilac_ara()
 	{
 		string file;
 		{
-			ifstream eczn_input(eczn_file);
-			eczn eczn_buff;
-			ilac ilac_buff;
+			ifstream eczn_input(pharmacy_file);
+			pharmacy eczn_buff;
+			medicine ilac_buff;
 
 			while (eczn_input >> eczn_buff)
 			{
-				file = eczn_buff.isim();
-				if (liste_kontrol(file))
+				file = eczn_buff.name();
+				if (list_check(file))
 				{
 					file += prefix;
 					ifstream ilac_input(file);
 					while (ilac_input >> ilac_buff)
 					{
-						if (ilac_buff.isim() == isim)
+						if (ilac_buff.name() == isim)
 						{
 							cout << "/////////////////////////////////////\n";
-							cout << eczn_buff.isim() << " Eczanesinde:\n";
+							cout << eczn_buff.name() << " Pharmacy:\n";
 							ilac_buff.print_all();
 							sleep(3000);
 						}
@@ -697,10 +692,10 @@ void ilac_ara()
 	}
 }
 
-void eczn_listele()
+void list_pharmacies()
 {
-	ifstream eczn_input(eczn_file);
-	eczn eczn_buff;
+	ifstream eczn_input(pharmacy_file);
+	pharmacy eczn_buff;
 
 	while (eczn_input >> eczn_buff)
 	{
@@ -710,20 +705,20 @@ void eczn_listele()
 	}
 }
 
-void eczn_ara()
+void search_pharmacy()
 {
-	ifstream eczn_input(eczn_file);
-	eczn eczn_buff;
+	ifstream eczn_input(pharmacy_file);
+	pharmacy eczn_buff;
 
 	string name;
-	cout << "Eczane Arama:\n";
-	cout << "\n\tEczane ismini girin: ";
+	cout << "Search Pharmacy:\n";
+	cout << "\n\tEnter Pharmacy Name: ";
 	cin >> name;
 	cout << "\n";
 
 	while (eczn_input >> eczn_buff)
 	{
-		if (eczn_buff.isim() == name)
+		if (eczn_buff.name() == name)
 		{
 			eczn_buff.print_all();
 			sleep(777);
@@ -731,32 +726,32 @@ void eczn_ara()
 			return;
 		}
 	}
-	cout << "Aradiginiz Eczane bulunamadi, Menu 2.2'den eczane listesini inceleyebilirsiniz.\n\n";
+	cout << "Couldnt find the searched Pharmacy,you can list Pharmacies through Menu 2.2.\n\n";
 	sleep(1111);
 	return;
 }
 
-void eczn_liste_ara()
+void search_pharmacy_list()
 {
 
-	eczn eczn_buff;
-	ilac ilac_buff;
+	pharmacy eczn_buff;
+	medicine ilac_buff;
 	string pretext = "_ilac.dat";
 	string name;
 
-	cout << "Eczane Liste Gosterici:\n";
-	cout << "\n\tEczane ismini girin: ";
+	cout << "Search Pharmacy List:\n";
+	cout << "\n\tEnter Pharmacy Name: ";
 	cin >> name;
 	cout << "\n";
 
-	if (liste_kontrol(name))
+	if (list_check(name))
 	{
 		name += pretext;
 	}
 
 	else
 	{
-		cout << "Aradiginiz liste bulunamamistir.\n\n";
+		cout << "Couldnt find the searched list.\n\n";
 		sleep(555);
 		return;
 	}
